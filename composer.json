@@ -1,0 +1,24 @@
+{
+    "name": "opdss/docparser",
+    "description": " a php document parser",
+    "type"       : "library",
+    "keywords"   : ["document", "parser", "docparser"],
+    "homepage"   : "http://php.istimer.com/",
+    "license"    : "MIT",
+    "authors"    : [
+        {
+            "name": "opdss",
+            "email": "opdss@qq.com",
+            "homepage": "http://www.istimer.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Opdss\\Docparser\\": "./"
+        }
+    },
+    "require": {
+        "php": ">=5.3.0"
+    }
+}
+

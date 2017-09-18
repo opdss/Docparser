@@ -1,4 +1,7 @@
 <?php
+
+namespace Opdss\Docparser;
+
 /**
  * Docparser.php for Docparser.
  * @author 阿新

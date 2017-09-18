@@ -5,6 +5,7 @@
  * @date 2017/9/18 15:48
  * @copyright istimer.com
  */
+namespace Opdss\Docparser;
 
 class Handler
 {
