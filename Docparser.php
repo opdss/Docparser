@@ -4,7 +4,7 @@ namespace Opdss\Docparser;
 
 /**
  * Docparser.php for Docparser.
- * @author 阿新
+ * @author 阿新 <opdss@qq.com>
  * @date 2017/9/18 12:06
  * @copyright istimer.com
  */
@@ -135,18 +135,11 @@ class Docparser {
 			if (is_array($this->params[$param])) {
 				array_push($this->params[$param], $value);
 			} else {
-				$old = $this->params[$param];
-				$this->params[$param] = array($old, $value);
+				$this->params[$param] = array($this->params[$param], $value);
 			}
 		}
 		return true;
 	}
-
-	public function __toString()
-	{
-		return $this->string;
-	}
-
 	/**
 	 * 设置handler
 	 *
@@ -175,6 +168,11 @@ class Docparser {
 			unset(self::$globalHandler[$name]);
 		}
 		return true;
+	}
+
+	public function __toString()
+	{
+		return $this->string;
 	}
 
 	public function getString()

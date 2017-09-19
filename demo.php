@@ -20,6 +20,8 @@ Opdss\Docparser\Docparser::setGlobalHandler('author', array('Opdss\Docparser\Han
 $doc_class = Opdss\Docparser\Docparser::factory($class->getDocComment());
 $doc_method = Opdss\Docparser\Docparser::factory($class->getMethod('setGlobalHandler')->getDocComment());
 
-var_dump($doc_class->getParams());
-var_dump($doc_method->getParams());
-var_dump($doc_method->getShortDesc());
+var_export($doc_class->getParams());
+echo PHP_EOL;
+var_export($doc_method->getParams());
+echo PHP_EOL;
+var_export($doc_method->getShortDesc());
