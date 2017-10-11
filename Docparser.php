@@ -1,14 +1,14 @@
 <?php
-
-namespace Opdss\Docparser;
-
 /**
  * Docparser.php for Docparser.
  * @author 阿新 <opdss@qq.com>
  * @date 2017/9/18 12:06
  * @copyright istimer.com
  */
-class Docparser {
+namespace Opdss\Docparser;
+
+class Docparser
+{
 
 	/**
 	 * 原始注释
@@ -38,13 +38,14 @@ class Docparser {
 	 * 对参数处理的handler
 	 * @var array
 	 */
-	private static $globalHandler  = array();
+	private static $globalHandler = array();
 
 	/**
 	 * Docparser constructor.
 	 * @param $string
 	 */
-	private function __construct($string) {
+	private function __construct($string)
+	{
 		$this->string = $string;
 		$this->parse();
 	}
@@ -59,18 +60,20 @@ class Docparser {
 		$ins = new self($docStr);
 		return $ins;
 	}
+
 	/**
 	 * 解析
 	 */
-	private function parse() {
+	private function parse()
+	{
 		if (empty($this->string)) {
 			return false;
 		}
-		if(preg_match('#^/\*\*(.*)\*/#s', $this->string, $comment) === false) {
+		if (preg_match('#^/\*\*(.*)\*/#s', $this->string, $comment) === false) {
 			return false;
 		}
 		$comment = trim($comment[1]);
-		if(preg_match_all('#^\s*\*(.*)#m', $comment, $lines) === false) {
+		if (preg_match_all('#^\s*\*(.*)#m', $comment, $lines) === false) {
 			return false;
 		}
 		$this->parseLines($lines[1]);
@@ -82,12 +85,13 @@ class Docparser {
 	 * @param array $lines
 	 * @return bool
 	 */
-	private function parseLines(array $lines) {
+	private function parseLines(array $lines)
+	{
 		if (empty($lines)) {
 			return false;
 		}
 		$desc = array();
-		foreach($lines as $line) {
+		foreach ($lines as $line) {
 			$parsedLine = $this->parseLine($line); //对每一行解析
 			if ($parsedLine !== false && empty($this->shortDesc)) {
 				$this->shortDesc = $parsedLine;
@@ -104,13 +108,14 @@ class Docparser {
 	 * @param $line
 	 * @return bool|string
 	 */
-	private function parseLine($line) {
+	private function parseLine($line)
+	{
 		$line = trim($line);
-		if(empty($line)) return false; //Empty line
-		if(strpos($line, '@') === 0) {
+		if (empty($line)) return false; //Empty line
+		if (strpos($line, '@') === 0) {
 			$param = substr($line, 1, strpos($line, ' ') - 1); //Get the parameter name
 			$value = substr($line, strlen($param) + 2); //Get the value
-			if($this->setParam($param, $value)) {
+			if ($this->setParam($param, $value)) {
 				return false;
 			}
 		}
@@ -124,12 +129,13 @@ class Docparser {
 	 * @param $value
 	 * @return bool
 	 */
-	private function setParam($param, $value) {
+	private function setParam($param, $value)
+	{
 		//对参数进行设置的handler 处理
-		$callable =  isset(self::$globalHandler[$param]) ? self::$globalHandler[$param] : null;
+		$callable = isset(self::$globalHandler[$param]) ? self::$globalHandler[$param] : null;
 		$value = $callable ? $callable($value) : $value;
 
-		if(!isset($this->params[$param])) {
+		if (!isset($this->params[$param])) {
 			$this->params[$param] = $value;
 		} else {
 			if (is_array($this->params[$param])) {
@@ -140,6 +146,7 @@ class Docparser {
 		}
 		return true;
 	}
+
 	/**
 	 * 设置handler
 	 *
@@ -147,7 +154,7 @@ class Docparser {
 	 * @param callable $callable 回调处理函数
 	 * @return bool
 	 */
-	public static function setGlobalHandler($name, $callable)
+	public static function setGlobalHandler($name, callable $callable)
 	{
 		if (is_callable($callable)) {
 			self::$globalHandler[$name] = $callable;
@@ -185,7 +192,8 @@ class Docparser {
 	 *
 	 * @return string
 	 */
-	public function getShortDesc() {
+	public function getShortDesc()
+	{
 		return $this->shortDesc;
 	}
 
@@ -194,7 +202,8 @@ class Docparser {
 	 *
 	 * @return string
 	 */
-	public function getDesc() {
+	public function getDesc()
+	{
 		return $this->longDesc;
 	}
 
@@ -203,7 +212,8 @@ class Docparser {
 	 *
 	 * @return array
 	 */
-	public function getParams() {
+	public function getParams()
+	{
 		return $this->params;
 	}
 

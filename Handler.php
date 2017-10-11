@@ -5,6 +5,7 @@
  * @date 2017/9/18 15:48
  * @copyright istimer.com
  */
+
 namespace Opdss\Docparser;
 
 class Handler
@@ -14,9 +15,9 @@ class Handler
 		$string = trim($string);
 		$arr = preg_split('#\ +#', $string, 3);
 		if (($len = count($arr)) == 2) {
-			return '('.$arr[0].')'.$arr[1];
+			return '(' . $arr[0] . ')' . $arr[1];
 		} elseif ($len == 3) {
-			return '('.$arr[0].')'.$arr[1].': '.$arr[2];
+			return '(' . $arr[0] . ')' . $arr[1] . ': ' . $arr[2];
 		}
 		return $string;
 	}
@@ -26,7 +27,7 @@ class Handler
 		$string = trim($string);
 		$arr = preg_split('#\ +#', $string, 2);
 		if (($len = count($arr)) == 2) {
-			return $arr[0].': '.$arr[1];
+			return $arr[0] . ': ' . $arr[1];
 		}
 		return $string;
 	}
