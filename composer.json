@@ -14,7 +14,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Opdss\\Docparser\\": "./"
+            "Opdss\\Docparser\\": "./src"
         }
     },
     "require": {
